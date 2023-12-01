@@ -21,32 +21,64 @@
 
 // Consider your entire calibration document. What is the sum of all of the calibration values?
 
+// --- Part Two ---
+// Your calculation isn't quite right. It looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
+
+// Equipped with this new information, you now need to find the real first and last digit on each line. For example:
+
+// two1nine
+// eightwothree
+// abcone2threexyz
+// xtwone3four
+// 4nineeightseven2
+// zoneight234
+// 7pqrstsixteen
+// In this example, the calibration values are 29, 83, 13, 24, 42, 14, and 76. Adding these together produces 281.
+
+// What is the sum of all of the calibration values?
+
 pub fn day_one() -> i32 {
-    let input = std::fs::read_to_string("src/resources/day_one_input.txt").unwrap();
+    let input = std::fs::read_to_string("src/resources/day_one_part_two_sample.txt").unwrap();
     let lines: Vec<&str> = input.lines().collect();
     let mut sum = 0;
 
-//   find first and last digit of each line
+    // Part 2
+
+    // convert written numbers to digits
+    // 'one' -> 1, 'two' -> 2, etc.
+
     for line in lines {
-        // remove non numeric characters
-        let line = line.chars().filter(|c| c.is_numeric()).collect::<String>();
-        // convert string to vector of chars
-        let line: Vec<char> = line.chars().collect();
-        // get first digit
-        let first_digit = line[0];
-        // get last digit
-        let last_digit = line[line.len() - 1];
-        // convert first digit to string
-        let first_digit = first_digit.to_string();
-        // convert last digit to string
-        let last_digit = last_digit.to_string();
-        // combine first and last digit
-        let combined = first_digit + &last_digit;
-        // convert combined string to i32
-        let combined = combined.parse::<i32>().unwrap();
-        // add combined to sum
-        sum += combined;
+
+        println!("line: {}", line);
+
+        let mut line = line.to_string();
+
+     
+        line = line.replace("one", "1");
+        line = line.replace("two", "2");
+        line = line.replace("three", "3");
+        line = line.replace("four", "4");
+        line = line.replace("five", "5");
+        line = line.replace("six", "6");
+        line = line.replace("seven", "7");
+        line = line.replace("eight", "8");
+        line = line.replace("nine", "9");
+
+        println!("line: {}", line);
+
+       
     }
+    // for line in lines {
+    //     let line = line.chars().filter(|c| c.is_numeric()).collect::<String>();
+    //     let line: Vec<char> = line.chars().collect();
+    //     let first_digit = line[0];
+    //     let last_digit = line[line.len() - 1];
+    //     let first_digit = first_digit.to_string();
+    //     let last_digit = last_digit.to_string();
+    //     let combined = first_digit + &last_digit;
+    //     let combined = combined.parse::<i32>().unwrap();
+    //     sum += combined;
+    // }
 
     return sum as i32;
 }
