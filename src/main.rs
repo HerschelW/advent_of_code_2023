@@ -6,5 +6,6 @@ pub mod modules {
 use modules::day_one::day_one;
 
 fn main() {
-    println!("Day One: {:?}", day_one());
+    let answer: i32 = day_one();
+    println!("The answer is {:#?}", answer);
 }

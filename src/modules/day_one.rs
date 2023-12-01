@@ -21,31 +21,32 @@
 
 // Consider your entire calibration document. What is the sum of all of the calibration values?
 
-use std::fs::File;
-use std::io::prelude::*;
-
-pub fn day_one() {
-    let mut file = File::open("input.txt").expect("File not found");
-    // split the file into lines
-    let mut contents = String::new();
-    file.read_to_string(&mut contents).expect("Something went wrong reading the file");
-    let lines = contents.split('\n');
+pub fn day_one() -> i32 {
+    let input = std::fs::read_to_string("src/resources/day_one_input.txt").unwrap();
+    let lines: Vec<&str> = input.lines().collect();
     let mut sum = 0;
+
+//   find first and last digit of each line
     for line in lines {
-        let mut chars = line.chars();
-        let first = chars.next().unwrap();
-        let last = chars.last().unwrap();
-        let first_digit = first.to_digit(10).unwrap();
-        let last_digit = last.to_digit(10).unwrap();
-        sum += first_digit + last_digit;
+        // remove non numeric characters
+        let line = line.chars().filter(|c| c.is_numeric()).collect::<String>();
+        // convert string to vector of chars
+        let line: Vec<char> = line.chars().collect();
+        // get first digit
+        let first_digit = line[0];
+        // get last digit
+        let last_digit = line[line.len() - 1];
+        // convert first digit to string
+        let first_digit = first_digit.to_string();
+        // convert last digit to string
+        let last_digit = last_digit.to_string();
+        // combine first and last digit
+        let combined = first_digit + &last_digit;
+        // convert combined string to i32
+        let combined = combined.parse::<i32>().unwrap();
+        // add combined to sum
+        sum += combined;
     }
-    sum as i32;
+
+    return sum as i32;
 }
-
-// read the input file
-// parse the input file
-// for each line in the input file
-// get the first and last digit of each line
-// add the first and last digit of each line
-// sum the results
-
