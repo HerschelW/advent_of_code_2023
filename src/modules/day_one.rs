@@ -29,7 +29,7 @@ pub fn day_one() {
     // split the file into lines
     let mut contents = String::new();
     file.read_to_string(&mut contents).expect("Something went wrong reading the file");
-    let lines = contents.split("\n");
+    let lines = contents.split('\n');
     let mut sum = 0;
     for line in lines {
         let mut chars = line.chars();
